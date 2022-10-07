@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Crear Estudiante</title>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">SISTEMA DE ESTUDIANTES</a>
+
+            <!-- Toggler/Collapse Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/students}" style="margin-left: 1180px;">Volver</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container mt-3">
+            <br>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                    <br>
+                    <h1 class = "text-center"> Crear Nuevo Estudiante </h1>
+                    <div class="card-body">
+                    <form th:action="@{/students}" th:object="${student}" method="POST">
+                        <div class="form-group">
+                            <label>Nombres</label>
+                            <input type="text" name="firstName" th:field="*{firstName}"
+                                   class="form-control"
+                                   placeholder="Ingresa aqui tus nombres" />
+                        </div>
+                        <div class="form-group">
+                            <label>Apellidos</label>
+                            <input type="text" name="lastName" th:field="*{lastName}"
+                                   class="form-control"
+                                   placeholder="Ingresa aqui tus apellidos" />
+                        </div>                        
+                        <div class="form-group">
+                            <label>Correo Electronico</label>
+                            <input type="text" name="email" th:field="*{email}"
+                                   class="form-control"
+                                   placeholder="Ingresa aqui tu correo" />
+                        </div> 
+                        <div class="form-group">
+                            <label>Cursos</label>
+                            <select th:field="${student.courses}" name="courses" class="form-control" multiple="true">
+                                <option th:each="course :${coursesList}" th:value="${course.id}" th:text="${course.name}" />
+                            </select>   
+                        </div>                         
+                        
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary" style="margin-left: 210px">Crear</button>
+                        </div>
+
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
